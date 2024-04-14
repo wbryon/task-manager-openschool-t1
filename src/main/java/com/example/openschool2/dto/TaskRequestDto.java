@@ -1,6 +1,10 @@
 package com.example.openschool2.dto;
 
 import com.example.openschool2.model.Status;
+import com.example.openschool2.util.LocalDateTimeDeserializer;
+import com.example.openschool2.util.LocalDateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -21,6 +25,8 @@ public class TaskRequestDto {
 
     @FutureOrPresent(message = "Due date must be in the future")
     @NotNull(message = "Due Date cannot be null")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime dueDate;
 
     private Status status;
