@@ -1,13 +1,14 @@
 package com.example.openschool2.service;
 
-import com.example.openschool2.model.Task;
+import com.example.openschool2.dto.TaskRequestDto;
+import com.example.openschool2.dto.TaskResponseDto;
 
 import java.util.List;
 
 public interface TaskService {
-    Task create(Task task);
-    Task findTaskById(Long taskId);
-    List<Task> findAll();
-    Task update(Task task);
+    TaskResponseDto create(TaskRequestDto task);
+    TaskResponseDto findTaskById(Long taskId);
+    List<TaskResponseDto> findAll();
+    TaskResponseDto update(Long taskId, TaskRequestDto request);
     void delete(Long taskId);
 }

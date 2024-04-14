@@ -2,7 +2,9 @@ package com.example.openschool2.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -10,11 +12,11 @@ import java.time.LocalDateTime;
 @Table(name = "tasks")
 @Getter
 @Setter
-
+@NoArgsConstructor
+@Accessors(chain = true)
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(nullable = false)
@@ -26,12 +28,6 @@ public class Task {
     @Column
     private LocalDateTime dueDate;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private Status status;
-
-    public Task() {
-        setStatus(Status.NEW);
-    }
 }
-
-
