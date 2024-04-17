@@ -32,18 +32,12 @@ public class TaskServiceImpl implements TaskService {
     public TaskResponseDto update(Long taskId, TaskRequestDto request) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new NotFoundException("Task with ID: " + taskId + " not found"));
-        if (request.getTitle() != null) {
-            task.setTitle(request.getTitle());
-        }
-        if (request.getDescription() != null) {
-            task.setDescription(request.getDescription());
-        }
-        if (request.getDueDate() != null) {
-            task.setDueDate(request.getDueDate());
-        }
-        if (request.getStatus() != null && isValidStatusUpdate(task.getStatus(), request.getStatus())) {
+        task.setTitle(request.getTitle());
+        task.setDescription(request.getDescription());
+        task.setDueDate(request.getDueDate());
+        if (isValidStatusUpdate(task.getStatus(), request.getStatus())) {
             task.setStatus(request.getStatus());
-        } else if (request.getStatus() != null) {
+        } else {
             throw new BadRequestException("Invalid status transition from " + task.getStatus() + " to " + request.getStatus());
         }
 
